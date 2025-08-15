@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neutral Mood</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f5f3eb;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #4a4a4a;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .container>div {
+            background-color: #e0e7f0;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        iframe {
+            width: 100%;
+            border: none;
+            border-radius: 12px;
+        }
+
+        blockquote {
+            font-style: italic;
+            margin-top: 10px;
+            color: #555;
+        }
+
+        button {
+            padding: 8px 16px;
+            background-color: #6495ed;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #4b76c2;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            resize: vertical;
+        }
+
+        p#joke-output {
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        .playlist {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>😒 Neutral? Let's do something exciting.</h1>
+    <main class="body">
+        <div class="container">
+            <div class="music">
+                <div class="playlist">🤘 Kick the roof with rock music</div>
+                <iframe style="border-radius:12px"
+                    src="https://open.spotify.com/embed/playlist/37i9dQZF1DX7P3Ec4TfanK?utm_source=generator"
+                    width="100%" height="380" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"></iframe>
+
+            </div>
+
+            <div class="quotes">
+                <h3>📝 Today's Mission</h3>
+                <blockquote id="mission">"Go near somebody and laugh looking at their forehead for no reason"</blockquote>
+            </div>
+
+            <div class="joke">
+                <h3>😁 Wanna hear a joke?? (a dark one)</h3>
+                <button onclick="tellJoke()">Listen</button>
+                <p id="joke-output"></p>
+            </div>
+
+            <div class="rant">
+                <h3>🤫 Let's gossip (this will be between you and me and Siri ofc...)</h3>
+                <form action="/submit-gossip" method="post">
+                    <textarea name="gossip" rows="4" placeholder="Let it out... (This will be a secret)"></textarea>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Mission quote changer
+        setInterval(() => {
+            let m = [
+                "Text your friend 'Calm down bro' with no context.",
+                "Play elevator music loudly and vibe like it’s a party.",
+                "Put 'I’m watching you' as your WhatsApp status.",
+                "Ask someone what day it is, then pretend they’re wrong.",
+                "Send a voice note saying only 'I know what you did' and don’t reply after.",
+                "Walk into a room, stare at the ceiling, and walk out.",
+                "Reply 'okay boomer' to someone regardless of age.",
+                "Start a sentence with 'not to be dramatic, but…' and say something very normal.",
+                "Send 'we need to talk' to 3 random contacts. Wait.",
+                "Speak in a British accent for the next 10 minutes.",
+                "Change your friend’s phone language to Japanese.",
+                "Comment 'this you?' under your friend’s old embarrassing post.",
+                "Add a random person to a group chat and say nothing.",
+                "Pretend to be offended by the word 'hello'.",
+                "Start a convo with 'So I hacked into NASA…'",
+                "Tell your friend they owe you ₹500 and stay confident.",
+                "Say 'no offense but...' and give a compliment.",
+                "Type your texts like Yoda for an hour. Talk backwards, you must.",
+                "Offer people imaginary gum and act shocked when they say no.",
+                "Laugh out loud suddenly while on a call and don’t explain why."
+            ];
+
+
+            let n = m[Math.floor(Math.random() * m.length)];
+            document.getElementById("mission").innerHTML = `"${n}"`;
+        }, 10000);
+
+        // Joke generator
+        function tellJoke() {
+            const jokes = [
+                "Why don’t graveyards ever get overcrowded? Because people are dying to get in.",
+                "Why did the skeleton go to the party alone? He had no body to go with him.",
+                "I told my therapist about my fear of commitment… now he’s not seeing me anymore.",
+                "Why don't orphans play hide and seek? Because no one looks for them.",
+                "My grief counselor died. But he was so good, I didn’t care.",
+                "What's the difference between a joke and three dead bodies? I don’t know, I’m still waiting for you to laugh.",
+                "Dark humor is like food. Not everyone gets it.",
+                "I have a joke about depression, but it never gets out of bed.",
+                "I wanted to make a joke about suicide, but it’s a bit of a hanging matter.",
+                "Why don’t cannibals eat comedians? Because they taste funny.",
+                "My friend asked me to stop impersonating a flamingo. I had to put my foot down.",
+                "Why don’t blind people skydive? It scares the hell out of their dogs.",
+                "I told my wife she was drawing her eyebrows too high. She looked surprised.",
+                "I'm great at multitasking. I can waste time, be unproductive, and procrastinate all at once.",
+                "I used to be a people person, but people ruined it.",
+                "I threw a boomerang a few years ago. I now live in constant fear.",
+                "Why did the man miss the funeral? He wasn’t dead yet.",
+                "They say money talks, but mine just says goodbye.",
+                "My favorite game? Hide and go die.",
+                "Why do I like cemeteries? People are dying to get in.",
+                "I'd tell you a joke about starvation, but none of them have a good ending.",
+                "The difference between a cat and a human? If you die in your house, your cat waits a day to eat you.",
+                "I told my mom I wanted to be cremated. She said she’d get the oven ready.",
+                "What's the worst combination of two things? Hope and reality.",
+                "I'm not saying I hate myself, but if I saw myself on fire, I'd roast marshmallows.",
+                "They say laughter is the best medicine... until you have schizophrenia.",
+                "Some people graduate with honors. I am just honored to graduate.",
+                "Sometimes I wish I was someone else. Then I remember... nah, they’re just as messed up."
+            ];
+
+
+            const randomIndex = Math.floor(Math.random() * jokes.length);
+            document.getElementById("joke-output").innerText = jokes[randomIndex];
+        }
+    </script>
+</body>
+
+</html>

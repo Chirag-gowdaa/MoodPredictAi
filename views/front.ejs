@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MoodBoardAI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Rubik", sans-serif;
+    }
+
+    body {
+      background: transparent;
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Fullscreen background iframe */
+    .bg-iframe {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      z-index: -1;
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 70px;
+      background: rgba(30, 30, 47, 0.8);
+      backdrop-filter: blur(6px);
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    main.bodyy {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 40px;
+      pointer-events: none;
+      /* Let robot clicks pass through */
+    }
+
+    .side-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      pointer-events: auto;
+      /* Make buttons clickable */
+    }
+
+    .bottom-random {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    button {
+      width: 180px;
+      height: 50px;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+      letter-spacing: 1px;
+    }
+
+
+
+    form {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* button {
+      width: 240px;
+      height: 60px;
+      font-size: 18px;
+      font-weight: 600;
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+      letter-spacing: 1px;
+    } */
+
+    .btn-angry {
+      background: #ff4d6d;
+      color: #fff;
+    }
+
+    .btn-angry:hover {
+      background: #ff1f4b;
+      box-shadow: 0 0 15px #ff4d6d, 0 0 30px #ff1f4b;
+    }
+
+    .btn-chill {
+      background: #00b4d8;
+      color: #fff;
+    }
+
+    .btn-chill:hover {
+      background: #0077b6;
+      box-shadow: 0 0 15px #00b4d8, 0 0 30px #0077b6;
+    }
+
+    .btn-productive {
+      background: #80ed99;
+      color: #1e1e2f;
+    }
+
+    .btn-productive:hover {
+      background: #57cc99;
+      box-shadow: 0 0 15px #80ed99, 0 0 30px #57cc99;
+    }
+
+    .btn-neutral {
+      background: #adb5bd;
+      color: #1e1e2f;
+    }
+
+    .btn-neutral:hover {
+      background: #ced4da;
+      box-shadow: 0 0 15px #adb5bd, 0 0 30px #ced4da;
+    }
+
+    .btn-random {
+      background: linear-gradient(135deg, #ff9f1c, #2ec4b6);
+      color: #fff;
+    }
+
+    .btn-random:hover {
+      box-shadow: 0 0 15px #ff9f1c, 0 0 30px #2ec4b6;
+    }
+
+    @media screen and (max-width: 600px) {
+      button {
+        width: 180px;
+        height: 50px;
+        font-size: 16px;
+      }
+
+      .header {
+        font-size: 16px;
+        padding: 0 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Spline 3D Background -->
+  <iframe class="bg-iframe" src="https://my.spline.design/genkubgreetingrobot-rkygW8FnWRYXeZAvjM5Fdclz/"
+    frameborder="0"></iframe>
+
+  <!-- Navbar -->
+  <nav class="header">
+    <div class="nav-center">MoodBoardAI – A Vibe-Based Content Generator</div>
+  </nav>
+
+  <main class="bodyy">
+    <div class="side-buttons left">
+      <form action="/angry" method="post"><button type="submit" class="btn-angry">😡 Angry</button></form>
+      <form action="/chill" method="post"><button type="submit" class="btn-chill">😌 Chill</button></form>
+    </div>
+
+    <div class="side-buttons right">
+      <form action="/study" method="post"><button type="submit" class="btn-productive">📚 Productive</button></form>
+      <form action="/normal" method="post"><button type="submit" class="btn-neutral">😐 Neutral</button></form>
+    </div>
+  </main>
+
+  <!-- Random button at the bottom -->
+  <div class="bottom-random">
+    <form action="/random" method="post"><button type="submit" class="btn-random">🎲 Random</button></form>
+  </div>
+
+
+
+</body>
+
+</html>

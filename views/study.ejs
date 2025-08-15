@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study Mode</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #d8f3dc, #b7e4c7);
+            color: #2d4739;
+        }
+
+        h1,
+        h3 {
+            color: #1b4332;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 30px;
+            background-color: #f0fdf4;
+            border-radius: 16px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.07);
+        }
+
+        .study-song iframe {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .quotes blockquote {
+            background-color: #e3f9e5;
+            padding: 18px;
+            border-left: 5px solid #95d5b2;
+            border-radius: 8px;
+            font-style: italic;
+            margin: 20px 0;
+            color: #2f5d3a;
+        }
+
+        .pomodoro {
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        #timer-display {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2d6a4f;
+        }
+
+        button {
+            background-color: #95d5b2;
+            color: #1b4332;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #74c69d;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #b7e4c7;
+            border-radius: 10px;
+            resize: none;
+            margin-top: 20px;
+            font-size: 16px;
+            background-color: #e9fbe5;
+            color: #1b4332;
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background-color: #95d5b2;
+            margin: 30px 0;
+            border-radius: 2px;
+        }
+
+        .goalbox {
+            background: #f5f7fa;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            width: 90%;
+            max-width: 600px;
+            margin: 40px auto;
+            border-left: 6px solid #2a9d8f;
+            transition: all 0.3s ease;
+        }
+
+        .goalbox:hover {
+            transform: scale(1.02);
+        }
+
+        .goals {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2a9d8f;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid #2a9d8f;
+            padding-bottom: 10px;
+        }
+
+        .goalbox ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .goalbox ul li {
+            background-color: #e8f5f1;
+            padding: 12px 20px;
+            margin: 10px 0;
+            border-radius: 10px;
+            font-size: 18px;
+            color: #1e1e2f;
+            font-weight: 500;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .goalbox ul li:hover {
+            transform: translateX(5px);
+            background-color: #d4f1ea;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>📖Lets get good marks this time.</h1>
+    <main class="study">
+        <div class="container">
+
+            <!-- 🎵 Music Section -->
+            <div class="study-song">
+                <h1>📑 Focus with Subtle Background Music...</h1>
+                <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX8Uebhn9wzrS?utm_source=generator"
+                    height="80" frameborder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"
+                    style="border-radius:12px; width:100%;"></iframe>
+            </div>
+            <hr>
+
+            <!-- 🧠 Quote Section -->
+            <div class="quotes">
+                <h3>🧠 Quote to Relax</h3>
+                <blockquote>"Success is the sum of small efforts, repeated day in and day out."</blockquote>
+            </div>
+            <hr>
+
+            <!-- ⏱️ Pomodoro Timer Section -->
+            <div class="pomodoro">
+                <h3>⏱️ Study Focus Timer</h3>
+                <p id="timer-display">25:00</p>
+                <button onclick="startTimer()">Start Focus Session</button>
+            </div>
+            <hr>
+
+            <!-- 📝 Goal Planner Form -->
+            <form action="/submit-study" method="post">
+                <h3>📝 Plan Your Day</h3>
+                <textarea name="goal" rows="4" placeholder="Write your study goals for today..."></textarea>
+                <button type="submit">Save Goals</button>
+            </form>
+            <div class="goalbox">
+                <div class="goals">Today's goals</div>
+                <ul>
+                    <% goals.forEach(goal=> { %>
+                        <li>
+                            <%= goal %>
+                        </li>
+                        <% }) %>
+                </ul>
+
+
+            </div>
+        </div>
+    </main>
+
+
+    <script>
+        let timer;
+        let timeLeft = 25 * 60;
+
+        function startTimer() {
+            clearInterval(timer);
+
+            timer = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+
+                document.getElementById("timer-display").innerText =
+                    `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+                timeLeft--;
+
+                if (timeLeft < 0) {
+                    clearInterval(timer);
+                    document.getElementById("timer-display").innerText = "Time's up! 🎉";
+                    timeLeft = 25 * 60;
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>

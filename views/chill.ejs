@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Chill Mood Zone</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #c0eaff, #e0f4ff);
+            color: #1a2e3f;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 30px;
+            color: #143b4f;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 25px;
+            background-color: #d7effc;
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .playlist {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #2b7195;
+            font-weight: 500;
+        }
+
+        iframe {
+            border-radius: 12px;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+        }
+
+        .quotes blockquote {
+            background-color: #cbe7f7;
+            padding: 18px;
+            border-left: 6px solid #5fbbe0;
+            border-radius: 12px;
+            font-style: italic;
+            color: #14303f;
+            margin: 20px 0;
+        }
+
+        .trip-planner {
+            margin-top: 30px;
+        }
+
+        .trip-planner h3 {
+            margin-bottom: 10px;
+            color: #1b3c51;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            background-color: #c3e6f7;
+            padding: 14px 16px;
+            border-bottom: 1px solid #98d2ee;
+            color: #144257;
+            transition: background 0.3s ease;
+        }
+
+        li:hover {
+            background-color: #adddf3;
+        }
+
+        li:last-child {
+            border-bottom: none;
+            border-radius: 0 0 10px 10px;
+        }
+
+        button {
+            background-color: #80cffa;
+            color: #082b3b;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #6cc3f2;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #a7d8f2;
+            border-radius: 12px;
+            resize: none;
+            margin-top: 20px;
+            font-size: 16px;
+            background-color: #e4f7ff;
+            color: #12303f;
+        }
+
+        #trip-result {
+            margin-top: 15px;
+            background-color: #beeafc;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 500;
+            color: #11425b;
+        }
+
+        p {
+            color: #0e2f3f;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🌿 You’re in a chill mood. Let’s keep it mellow and magical.</h1>
+
+    <main class="body">
+        <div class="container">
+            <div class="music">
+                <div class="playlist">Suit yourself with Chill Music 🥶</div>
+                <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4WYpdgoIcn6" width="100%" height="80"
+                    frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            </div>
+            <div class="quotes">
+                <h3>🧠 Quote to Relax</h3>
+                <blockquote>"You don’t have to control your thoughts. You just have to stop letting them control you."</blockquote>
+            </div>
+            <div class="trip-planner">
+                <h3>🌍 Trending Destinations of 2025</h3>
+                <ul>
+                    <li>🏖️ Bali – Relaxing beaches + spa vibes</li>
+                    <li>🏔️ Himachal – Peace in the mountains</li>
+                    <li>🌆 Kyoto – Calm streets, zen gardens</li>
+                    <li>🏝️ Maldives – Floating villas & sunsets</li>
+                    <li>🏙️ Osaka, Japan – Food paradise & culture blend</li>
+                    <li>🏞️ Moab, USA – Red rock adventures & national parks</li>
+                    <li>🏝️ Koh Samui, Thailand – Beaches, groves, and vibes</li>
+                </ul>
+
+                <button id="tripgen">🎲 Suggest Me a Place</button>
+                <p id="trip-result"></p>
+            </div>
+            <form action="/submit-note" method="post">
+                <textarea name="note" rows="4" placeholder="Write a peaceful thought..."></textarea>
+                <button type="submit">Save Note</button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        const places = [
+            "Bali 🌴 – Chill beach escape with sunset yoga",
+            "Manali 🏔️ – Cozy up in the snow with mountain views",
+            "Goa 🎉 – Late-night music and morning sea breeze",
+            "Udaipur 🏰 – Royal palaces and peaceful lakes",
+            "Ladakh 🚗 – Long drives, stargazing, and soul talks",
+            "Sikkim 🌿 – Tea gardens, monasteries, and cloud hugs",
+            "Coorg ☕ – Coffee estate walks and light rains",
+            "Rishikesh 🧘 – Ganga aarti and spiritual recharge",
+            "Auroville 🌻 – Peaceful living and conscious art",
+            "Pondicherry 🐚 – French vibes and calm cafes",
+            "Hampi 🪨 – Ruins, rivers, and raw beauty",
+            "Spiti Valley ❄️ – Frozen lakes and Himalayan silence",
+            "Alleppey 🚣 – Houseboat rides and coconut groves",
+            "Kodaikanal 🌫️ – Misty mornings and forest trails",
+            "Darjeeling 🚂 – Toy trains and sunrise at Tiger Hill",
+            "Jaisalmer 🐫 – Sand dunes and desert camps",
+            "Andaman 🐠 – Scuba diving and crystal waters",
+            "Munnar 🌱 – Rolling hills and tea leaf therapy",
+            "Meghalaya 🌧️ – Caves, clouds, and waterfalls",
+            "Kasol 🔥 – Chill cafes and trance under the stars"
+        ];
+
+        document.getElementById('tripgen').addEventListener("click", () => {
+            const randomIndex = Math.floor(Math.random() * places.length);
+            document.getElementById("trip-result").innerText = places[randomIndex];
+        });
+    </script>
+</body>
+
+</html>
